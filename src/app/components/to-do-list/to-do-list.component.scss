@@ -1,0 +1,86 @@
+.common {
+  &-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-width: 400px;
+    &__item {
+      margin: 0 0 10px 0;
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #bbb;
+    }
+    &__button {
+      display: inline-block;
+      padding: 2px 18px;
+      color: #000;
+      border: 2px solid #000;
+      text-transform: uppercase;
+      font-family: "Quattrocento Sans", Verdana, sans-serif;
+      font-size: 14px;
+      line-height: 28px;
+      font-weight: 400;
+      border-radius: 3px;
+      vertical-align: middle;
+      cursor: pointer;
+      &:hover {
+        color: #000;
+        background-color: #ffacac;
+        border: 2px solid #000000;
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.task {
+  display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    max-width: 400px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 0 0;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  &__input {
+    width: 55%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+    font: inherit;
+    color: #000;
+    background-color: #eaeef1;
+    border: none;
+    margin: 0 20px 0 0;
+    height: 36px;
+    @media screen and (max-width: 767px) {
+      width: auto;
+      margin: 0 0 15px 0;
+    }
+  }
+  &__button {
+
+    &-add {
+      display: inline-block;
+      padding: 2px 18px;
+      color: #fff;
+      border: 2px solid #000;
+      text-transform: uppercase;
+      font-family: "Quattrocento Sans", Verdana, sans-serif;
+      font-size: 14px;
+      line-height: 28px;
+      font-weight: 400;
+      border-radius: 3px;
+      vertical-align: middle;
+      background-color: #6eb86e;
+      cursor: pointer;
+    }
+  }
+}

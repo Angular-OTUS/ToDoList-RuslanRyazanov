@@ -1,0 +1,19 @@
+html {
+  box-sizing: border-box;
+}
+
+*, ::before, ::after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.container {
+  width: 1140px;
+  margin: 0 auto;
+  padding: 0;
+  @media screen and (max-width: 767px) {
+    width: 320px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+}
