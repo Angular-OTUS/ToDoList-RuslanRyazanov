@@ -1,17 +1,22 @@
 <h1>ToDo List</h1>
-<ul class="common-list">
-  <app-to-do-list-item *ngFor="let item of listItems"
-                      [listItem]="item"
-                      (delete)="deleteItem(item.id)">
-  </app-to-do-list-item>
-</ul>
+<div *ngIf="isLoading; else taskList"
+      class="spinner" ></div>
+<ng-template #taskList>
+  <ul class="common-list">
+    <app-to-do-list-item *ngFor="let item of listItems"
+                        [listItem]="item"
+                        (delete)="deleteItem(item.id)">
+    </app-to-do-list-item>
+  </ul>
+</ng-template>
 
 <div class="task">
   <input class="task__input"
         [(ngModel)]="newItemValue"
         matInput>
-  <button (click)="addItem(newItemValue); newItemValue=''"
-          class="task__button-add"
-          [disabled]="!newItemValue.trim()">Add task
-  </button>
+  <app-button   (click)="addItem(newItemValue); newItemValue=''"
+                [title]="'Add task'"
+                [disabled]="!newItemValue.trim()"
+                [classTypeButton]="'common__button_add'">
+  </app-button>
 </div>

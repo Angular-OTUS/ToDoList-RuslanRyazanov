@@ -1,0 +1,31 @@
+.common {
+  &__button {
+    display: inline-block;
+    padding: 2px 18px;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    font-family: "Quattrocento Sans", Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 28px;
+    border-radius: 3px;
+    vertical-align: middle;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+    }
+    &_add {
+      color: #fff;
+      background-color: #6eb86e;
+    }
+    &_delete {
+      color: #000;
+      &:hover {
+        color: #000;
+        background-color: #ffacac;
+        border: 2px solid #000000;
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
+
+}
