@@ -36,25 +36,4 @@
       margin: 0 0 15px 0;
     }
   }
-  &__button {
-
-    &-add {
-      display: inline-block;
-      padding: 2px 18px;
-      color: #fff;
-      border: 2px solid #000;
-      text-transform: uppercase;
-      font-family: "Quattrocento Sans", Verdana, sans-serif;
-      font-size: 14px;
-      line-height: 28px;
-      font-weight: 400;
-      border-radius: 3px;
-      vertical-align: middle;
-      background-color: #6eb86e;
-      cursor: pointer;
-      &:disabled {
-        opacity: 0.5;
-      }
-    }
-  }
 }
