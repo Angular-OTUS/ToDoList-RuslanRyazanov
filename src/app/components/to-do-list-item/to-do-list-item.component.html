@@ -1,7 +1,8 @@
 <li class="common-list__item">
   <span class="common-list__name">{{ listItem.text }}</span>
-  <app-button (click)="deleteItem()"
+  <app-button (click)="deleteItem($event)"
               [classTypeButton]="'common__button_delete'"
-              [title]="'Delete'">
+              [title]="'Delete'"
+              tooltip="click to delete">
 </app-button>
 </li>
