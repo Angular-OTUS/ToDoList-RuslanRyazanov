@@ -3,12 +3,13 @@
       class="spinner" ></div>
 <ng-template #taskList>
   <ul class="common-list">
-    <app-to-do-list-item *ngFor="let item of listItems"
+    <app-to-do-list-item *ngFor="let item of getAllListItems()"
                         [listItem]="item"
                         (delete)="deleteItem(item.id)"
                         (click)="selectItem(item.id)"
                         tooltip="description"
-                        [ngClass]="{'selected': selectedItemId === item.id}">
+                        [ngClass]="{'selected': selectedItemId === item.id}"
+                        (update)="updateItem($event)">
     </app-to-do-list-item>
   </ul>
   <p  *ngIf="selectedItemId"
