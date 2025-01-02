@@ -1,8 +1,18 @@
 <li class="common-list__item">
-  <span class="common-list__name">{{ listItem.text }}</span>
+  <div (dblclick)="enableEdit()">
+    <span *ngIf="!isEditing" class="common-list__name">{{ listItem.text }}</span>
+    <div *ngIf="isEditing">
+      <input type="text" [(ngModel)]="editText" />
+      <app-button
+        [title]="saveButtonTitle"
+        (click)="saveTitle()"
+        [classTypeButton]="'common__button_save'">
+      </app-button>
+    </div>
+  </div>
   <app-button (click)="deleteItem($event)"
               [classTypeButton]="'common__button_delete'"
               [title]="'Delete'"
               tooltip="click to delete">
-</app-button>
+  </app-button>
 </li>

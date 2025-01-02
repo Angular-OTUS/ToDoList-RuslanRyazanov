@@ -1,0 +1,9 @@
+<div class="toast">
+  <div class="toast__block" *ngFor="let toast of toasts; let i = index">
+    <span class="toast__text">{{ toast }}</span>
+    <app-button [title]="closeToastButtonTitle"
+                (click)="removeToast(i)"
+                [classTypeButton]="'common__button_toast'">
+    </app-button>
+  </div>
+</div>
