@@ -5,7 +5,7 @@ import { Component,
   ElementRef,
   HostListener,
 } from '@angular/core';
-import { TodoListItem } from '../../interfaces/to-do-list-item';
+import { TodoListItem, ItemStatus } from '../../interfaces/to-do-list-item';
 import { ButtonComponent } from '../button/button.component';
 import { TooltipDirective } from "../../shared/directives/tooltip.directive";
 import { FormsModule } from "@angular/forms";
@@ -20,18 +20,17 @@ import { NgIf } from "@angular/common";
 })
 export class ToDoListItemComponent {
   @Input() listItem!: TodoListItem;
-  @Output() delete = new EventEmitter<string>();
-  @Output() update = new EventEmitter<TodoListItem>();
-  deleteButtonTitle = "Delete";
-  saveButtonTitle = "Save";
-  isEditing = false;
-  editText = '';
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
+  @Output() update: EventEmitter<TodoListItem> = new EventEmitter<TodoListItem>();
+  public deleteButtonTitle: string = "Delete";
+  public saveButtonTitle: string = "Save";
+  public isEditing: boolean = false;
+  public editText: string = '';
   constructor(
     private elementRef: ElementRef
   ) {}
 
-  public deleteItem(event: MouseEvent) {
-    event.stopPropagation();
+  public deleteItem() {
     this.delete.emit(this.listItem.id);
   }
   public enableEdit() {
@@ -52,4 +51,12 @@ export class ToDoListItemComponent {
       this.isEditing = false;
     }
   }
+
+  public toggleStatus(): void {
+    this.listItem.status = this.listItem.status === ItemStatus.IN_PROGRESS ?
+      ItemStatus.COMPLETED : ItemStatus.IN_PROGRESS;
+    this.update.emit(this.listItem);
+  }
+
+  public ItemStatus = ItemStatus;
 }

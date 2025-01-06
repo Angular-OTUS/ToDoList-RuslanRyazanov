@@ -1,0 +1,38 @@
+.task {
+  display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    max-width: 400px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 0 0;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  &__input {
+    width: 55%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+    font: inherit;
+    color: #000;
+    background-color: #eaeef1;
+    border: none;
+    margin: 0 20px 0 0;
+    height: 36px;
+    @media screen and (max-width: 767px) {
+      width: auto;
+      margin: 0 0 15px 0;
+    }
+  }
+}
+
+.textarea {
+  padding: 20px;
+  font-size: 18px;
+  border: 1px solid #333131;
+  border-radius: 2px;
+  margin: 10px auto;
+  resize: none;
+}

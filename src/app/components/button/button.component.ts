@@ -9,9 +9,6 @@ import { NgClass } from "@angular/common";
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
-
-  @Input() title = '';
-  @Input() disabled = false;
-  @Input() classTypeButton = '';
-
+  @Input() disabled?: boolean;
+  @Input() classTypeButton:string = '';
 }
