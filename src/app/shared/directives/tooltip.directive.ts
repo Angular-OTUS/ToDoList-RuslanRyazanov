@@ -26,22 +26,22 @@ import {
     }
 
     @HostListener("mouseenter") onMouseEnter(event: MouseEvent) {
-      // if (event.target === event.currentTarget) {
         this.timer = setTimeout(() => {
-          let x =
+          const x =
             this.el.nativeElement.getBoundingClientRect().left +
             this.el.nativeElement.offsetWidth / 2;
-          let y =
+          const y =
             this.el.nativeElement.getBoundingClientRect().top +
             this.el.nativeElement.offsetHeight + 6;
           this.createTooltipPopup(x, y);
         }, this.delay);
-      //}
 
     }
 
     @HostListener("mouseleave") onMouseLeave() {
-      if (this.timer) clearTimeout(this.timer);
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
       if (this.myPopup) {
         this.myPopup.remove();
       }
@@ -57,6 +57,6 @@ import {
       this.myPopup = popup;
       setTimeout(() => {
         if (this.myPopup) this.myPopup.remove();
-      }, 5000); // Remove tooltip after 5 seconds
+      }, 5000);
     }
   }
