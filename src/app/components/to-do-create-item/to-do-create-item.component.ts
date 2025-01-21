@@ -19,11 +19,11 @@ import { TodoListService } from "../../shared/services/todoListService";
   styleUrl: './to-do-create-item.component.scss'
 })
 export class ToDoCreateItemComponent {
-  public inputPlaceholder: string = "Add your new todo"
-  public descriptionPlaceholder: string = "Add your new todo description"
-  public addButtonTitle: string = "Add task"
-  public newItemValue: string = '';
-  public newItemDescription: string = '';
+  public readonly inputPlaceholder: string = "Add your new todo"
+  public readonly descriptionPlaceholder: string = "Add your new todo description"
+  public readonly addButtonTitle: string = "Add task"
+  public readonly newItemValue: string = '';
+  public readonly newItemDescription: string = '';
 
   @Output() addItem: EventEmitter<boolean> = new EventEmitter<boolean>();
 
