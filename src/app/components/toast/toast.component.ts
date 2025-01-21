@@ -14,8 +14,8 @@ import {ToastService} from "../../shared/services/toastService";
   styleUrl: './toast.component.scss'
 })
 export class ToastComponent implements OnInit {
-  closeToastButtonTitle = 'X';
-  toasts: string[] = []
+  public closeToastButtonTitle:string = 'X';
+  public toasts: string[] = []
   constructor(
     private toastsService: ToastService
   ) {}

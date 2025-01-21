@@ -4,11 +4,9 @@ import {BehaviorSubject, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ToastService {
-  private toasts: string[] = [];
-  private toastsSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(this.toasts);
+  private toastsSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   constructor() {}
-
   public getObservableToastsSubject(): Observable<string[]> {
     return this.toastsSubject.asObservable();
   }

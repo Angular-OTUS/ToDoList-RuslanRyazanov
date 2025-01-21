@@ -1,35 +1,25 @@
 <h1>ToDo List</h1>
-<div *ngIf="isLoading; else taskList"
-      class="spinner" ></div>
+<div>
+  <mat-form-field appearance="fill" class="select-field">
+    <mat-select [(value)]="selectedStatus" (selectionChange)="filterItems()">
+      <mat-option [value]="null">All</mat-option>
+      <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<app-spinner *ngIf="isLoading; else taskList"></app-spinner>
 <ng-template #taskList>
   <ul class="common-list">
     <app-to-do-list-item *ngFor="let item of getAllListItems()"
                         [listItem]="item"
                         (delete)="deleteItem(item.id)"
                         (click)="selectItem(item.id)"
-                        tooltip="description"
                         [ngClass]="{'selected': selectedItemId === item.id}"
                         (update)="updateItem($event)">
     </app-to-do-list-item>
   </ul>
   <p  *ngIf="selectedItemId"
-      class="description">{{ isSelectedItemDescription() }}</p>
+      class="description">{{ this.isSelectedItemDescription }}</p>
 </ng-template>
 
-<div class="task">
-  <input class="task__input"
-        [(ngModel)]="newItemValue"
-        matInput>
-  <app-button   (click)="addItem(newItemValue, newItemDescription); newItemValue=''; newItemDescription=''"
-                [title]="'Add task'"
-                [disabled]="!newItemValue.trim()"
-                [classTypeButton]="'common__button_add'"
-                tooltip="add new item">
-  </app-button>
-</div>
-
-<textarea   matInput
-            [(ngModel)]="newItemDescription"
-            placeholder="description"
-            class="textarea">
-</textarea>
+<app-to-do-create-item (addItem)="addItem($event)"></app-to-do-create-item>

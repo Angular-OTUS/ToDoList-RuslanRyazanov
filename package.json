@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:application": "node dist/application/server/server.mjs"
+    "serve:ssr:application": "node dist/application/server/server.mjs",
+    "json-server": "npx json-server --watch items.json"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +28,8 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3",
     "@angular/cdk": "^18.2.1",
-    "@angular/material": "^18.2.1"
+    "@angular/material": "^18.2.1",
+    "json-server": "^1.0.0-beta.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.1.2",
