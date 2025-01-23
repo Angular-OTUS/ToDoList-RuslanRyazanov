@@ -22,8 +22,8 @@ export class ToDoCreateItemComponent {
   public readonly inputPlaceholder: string = "Add your new todo"
   public readonly descriptionPlaceholder: string = "Add your new todo description"
   public readonly addButtonTitle: string = "Add task"
-  public readonly newItemValue: string = '';
-  public readonly newItemDescription: string = '';
+  public newItemValue: string = '';
+  public newItemDescription: string = '';
 
   @Output() addItem: EventEmitter<boolean> = new EventEmitter<boolean>();
 
