@@ -20,8 +20,8 @@ import { NgIf } from "@angular/common";
 })
 export class ToDoListItemComponent {
   @Input() listItem!: TodoListItem;
-  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
-  @Output() update: EventEmitter<TodoListItem> = new EventEmitter<TodoListItem>();
+  @Output() delete = new EventEmitter();
+  @Output() update = new EventEmitter();
   public deleteButtonTitle: string = "Delete";
   public saveButtonTitle: string = "Save";
   public isEditing: boolean = false;

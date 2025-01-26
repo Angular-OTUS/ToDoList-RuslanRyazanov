@@ -1,3 +1,5 @@
+
+
 .common {
   &-list {
     display: flex;
@@ -10,14 +12,18 @@
 
 }
 
-.description {
-    font-size: 20px;
-    margin: 20px 0;
-    background: cornflowerblue;
-    padding: 20px;
-    max-width: 400px;
-}
-
 .select-container {
   position: relative;
+}
+
+.tasks {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
 }

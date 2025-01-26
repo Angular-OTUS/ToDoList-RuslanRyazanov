@@ -1,6 +1,6 @@
 <h1>ToDo List</h1>
 <div>
-  <mat-form-field appearance="fill" class="select-field">
+  <mat-form-field appearance="fill" class="select-container">
     <mat-select [(value)]="selectedStatus" (selectionChange)="filterItems()">
       <mat-option [value]="null">All</mat-option>
       <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
@@ -9,17 +9,19 @@
 </div>
 <app-spinner *ngIf="isLoading; else taskList"></app-spinner>
 <ng-template #taskList>
-  <ul class="common-list">
-    <app-to-do-list-item *ngFor="let item of getAllListItems()"
-                        [listItem]="item"
-                        (delete)="deleteItem(item.id)"
-                        (click)="selectItem(item.id)"
-                        [ngClass]="{'selected': selectedItemId === item.id}"
-                        (update)="updateItem($event)">
-    </app-to-do-list-item>
-  </ul>
-  <p  *ngIf="selectedItemId"
-      class="description">{{ this.isSelectedItemDescription }}</p>
+  <div class="tasks-container">
+    <ul class="common-list">
+      <app-to-do-list-item *ngFor="let item of getAllListItems()"
+                          [listItem]="item"
+                          (delete)="deleteItem(item.id)"
+                          (click)="selectItem(item.id)"
+                          [ngClass]="{'selected': selectedItemId === item.id}"
+                          (update)="updateItem($event)">
+      </app-to-do-list-item>
+    </ul>
+    <router-outlet/>
+  </div>
+
 </ng-template>
 
 <app-to-do-create-item (addItem)="addItem($event)"></app-to-do-create-item>

@@ -12,6 +12,7 @@ import { ToastService } from "../../shared/services/toastService";
 import { SpinnerComponent } from "../spinner/spinner.component";
 import { MatOption, MatSelect } from "@angular/material/select";
 import { ToDoCreateItemComponent } from "../to-do-create-item/to-do-create-item.component";
+import { Router, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-to-do-list',
@@ -29,7 +30,8 @@ import { ToDoCreateItemComponent } from "../to-do-create-item/to-do-create-item.
     SpinnerComponent,
     MatSelect,
     MatOption,
-    ToDoCreateItemComponent
+    ToDoCreateItemComponent,
+    RouterOutlet
   ],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
@@ -43,14 +45,14 @@ export class ToDoListComponent implements OnInit {
   public componentTitle: string = "Todo List"
   public isLoading: boolean = true;
   public selectedItemId: string = '';
-  public isSelectedItemDescription: string = '';
   public filteredItems: TodoListItem[] = [];
   public selectedStatus: ItemStatus | null = null;
   public statuses: string[] = Object.values(ItemStatus);
 
   constructor(
     private todoListService: TodoListService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,10 +79,7 @@ export class ToDoListComponent implements OnInit {
 
   public selectItem(itemId: string) {
     this.selectedItemId = itemId;
-    this.todoListService.getAllListItems()
-    .subscribe((listItems) => {
-    this.isSelectedItemDescription = listItems.find(item => item.id === this.selectedItemId)?.description ?? '';
-  })
+    this.router.navigate([`/tasks/${itemId}`]).then();
   }
   public updateItem(updatedItem: TodoListItem) {
     this.todoListService.updateItem(updatedItem);

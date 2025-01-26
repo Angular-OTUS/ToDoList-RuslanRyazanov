@@ -10,5 +10,5 @@ import { NgClass } from "@angular/common";
 })
 export class ButtonComponent {
   @Input() disabled?: boolean;
-  @Input() classTypeButton:string = '';
+  @Input() classTypeButton: string = '';
 }
