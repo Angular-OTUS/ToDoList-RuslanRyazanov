@@ -1,0 +1,23 @@
+<div class="board">
+  <div class="board__side">
+    <h1>Board</h1>
+    <div class="board__links">
+      @for (route of routes; track route) {
+        <a
+          [routerLink]="'/' + route.path"
+          [ngClass]="{'board__link': true, 'board__link_selected': isCurrentRoute(route.name)}"
+        >
+          {{ route.name }}
+        </a>
+      }
+    </div>
+  </div>
+  <div class="board__field">
+    <div class="board__top">
+      <h3>{{ this.getCurrentTabName() }}</h3>
+    </div>
+    <div class="board-container">
+      <router-outlet/>
+    </div>
+  </div>
+</div>

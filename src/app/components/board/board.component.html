@@ -1,0 +1,18 @@
+<div>
+  <app-spinner *ngIf="isLoading; else content"></app-spinner>
+  <ng-template #content>
+    <div class="column">
+      <div *ngFor="let status of statuses" class="column__item">
+        <h2>{{ status }}</h2>
+        <div class="todo-list">
+          <app-to-do-list-item *ngFor="let item of getAllListItemsByStatus(status)"
+                             class="todo-item"
+                             [listItem]="item"
+                             (delete)="deleteItem(item.id)"
+                             (update)="updateItem($event)"/>
+        </div>
+      </div>
+    </div>
+    <router-outlet/>
+  </ng-template>
+</div>

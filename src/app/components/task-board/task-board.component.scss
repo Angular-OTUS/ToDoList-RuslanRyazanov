@@ -1,0 +1,38 @@
+
+.board {
+  display: flex;
+  &__top {
+    padding: 10px;
+    background-color: #416bc5;
+    color: #ffffff;
+  }
+  &__side {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #416bc5;
+    color: #ffffff;
+    border-right: 1px solid #ffffff;
+  }
+  &__links {
+    display: flex;
+    flex-direction: column;
+  }
+  &__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 0 20px 0;
+    &_selected {
+      color: #5ad660;
+    }
+  }
+  &__field {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  &-container {
+    padding: 20px;
+  }
+}
