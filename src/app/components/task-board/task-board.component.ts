@@ -14,16 +14,13 @@ import { NgClass } from "@angular/common";
   styleUrl: './task-board.component.scss'
 })
 export class TaskBoardComponent {
-  protected readonly componentTitle: string = 'Board';
-
   constructor(
     private router: Router
   ) {}
 
   protected getCurrentTabName(): string | undefined {
     const currentPath: string = this.router.url.split('/').filter(Boolean).join('/');
-    const route = this.routes
-      .find(route => currentPath.startsWith(route.path));
+    const route = this.routes.find(route => currentPath.startsWith(route.path));
 
     return route?.name;
   }

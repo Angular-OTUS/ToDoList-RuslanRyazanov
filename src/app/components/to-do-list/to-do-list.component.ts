@@ -85,7 +85,7 @@ export class ToDoListComponent implements OnInit, OnDestroy {
 
   public selectItem(itemId: string) {
     this.selectedItemId = itemId;
-    this.router.navigate([`/tasks/${itemId}`]).then();
+    this.router.navigate([`backlog/tasks/${itemId}`]).then();
   }
   public updateItem(updatedItem: TodoListItem) {
     this.todoListService.updateItem(updatedItem)
