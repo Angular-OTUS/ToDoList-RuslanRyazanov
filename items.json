@@ -10,7 +10,7 @@
       "id": "44",
       "text": "ssssete prasdasdasevious task",
       "description": "Be happy about your new laptop",
-      "status": "IN_PROGRESS"
+      "status": "COMPLETED"
     },
     {
       "id": "55",
@@ -52,6 +52,12 @@
       "id": "732",
       "text": "dfdfd",
       "description": "dfdfdfdfdf",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": "482",
+      "text": "frgfg",
+      "description": "fdgdsgdfg",
       "status": "IN_PROGRESS"
     }
   ]

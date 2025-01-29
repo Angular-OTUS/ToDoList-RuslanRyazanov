@@ -48,22 +48,20 @@ export class TodoListService {
   public getAllListItems(): Observable<TodoListItem[]> {
     return this.httpClient.get<TodoListItem[]>(this.apiUrl);
   }
-  public updateItem(updatedItem: TodoListItem): void {
-    this.httpClient.put(`${this.apiUrl}/${updatedItem.id}`, updatedItem)
-      .subscribe({
-        error: (err) => {
-          this.toastService.showToast(`Error update item`);
-          console.error(err);
-        }
-    })
+  public updateItem(updatedItem: TodoListItem): Observable<TodoListItem> {
+    return this.httpClient.put<TodoListItem>(`${this.apiUrl}/${updatedItem.id}`, updatedItem)
   }
-  public deleteItem(itemId: string): void {
-    this.httpClient.delete(`${this.apiUrl}/${itemId}`)
-      .subscribe({
-        error: (err) => {
-          this.toastService.showToast(`Error deleting item`);
-          console.error(err);
-        }
-    })
+  public deleteItem(itemId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${itemId}`)
+  }
+  public updateItemArray(items: TodoListItem[], updatedItem: TodoListItem): TodoListItem[] {
+    const index: number = items.findIndex(item => item.id === updatedItem.id);
+    if (index !== -1) {
+      items[index] = updatedItem;
+    }
+    return [...items];
+  }
+  public deleteItemArray(items: TodoListItem[], itemId: string): TodoListItem[] {
+    return items.filter(item => item.id !== itemId);
   }
 }

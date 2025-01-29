@@ -1,0 +1,23 @@
+.column {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 16px;
+  box-sizing: border-box;
+  &__item {
+    flex: 1;
+    min-width: 200px;
+    max-width: auto;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  &__title {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+  }
+}
