@@ -16,7 +16,8 @@
     <div class="board__top">
       <h3>{{ this.getLocalTabName() }}</h3>
       <div class="switch-lang">
-        <button class="switch-lang__button" (click)="switchLanguage(currentLang === 'en' ? 'ru' : 'en')">{{ currentLang === 'en' ? 'English' : 'Русский' }}</button>
+        <input type="checkbox" name="toggle" id="toggle-button" class="toggle-button" (click)="switchLanguage(currentLang === 'en' ? 'ru' : 'en')">
+        <label for="toggle-button" class="toggle-text" >{{ currentLang === 'en' ? 'English' : 'Русский' }}</label>
       </div>
     </div>
     <div class="board-container">

@@ -9,7 +9,7 @@
   "item.create.tooltip": "Новая задача",
   "item.create.addPlaceholder": "Новая задача",
   "item.create.descriptionPlaceholder": "Описание",
-  "item.create.addButtonTitle": "Добавить задачу",
+  "item.create.addButtonTitle": "Добавить",
   "toast.task.created": "Задача создана",
   "toast.task.updated": "Задача обновлена",
   "toast.task.deleted": "Задача удалена",
