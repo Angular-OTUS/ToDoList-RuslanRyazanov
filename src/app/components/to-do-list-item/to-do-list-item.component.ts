@@ -10,11 +10,18 @@ import { ButtonComponent } from '../button/button.component';
 import { TooltipDirective } from "../../shared/directives/tooltip.directive";
 import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-to-do-list-item',
   standalone: true,
-  imports: [ButtonComponent, TooltipDirective, FormsModule, NgIf],
+  imports: [
+    ButtonComponent,
+    TooltipDirective,
+    FormsModule,
+    NgIf,
+    TranslatePipe
+  ],
   templateUrl: './to-do-list-item.component.html',
   styleUrl: './to-do-list-item.component.scss'
 })
@@ -22,8 +29,6 @@ export class ToDoListItemComponent {
   @Input() listItem!: TodoListItem;
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
-  public deleteButtonTitle: string = "Delete";
-  public saveButtonTitle: string = "Save";
   public isEditing: boolean = false;
   public editText: string = '';
   constructor(

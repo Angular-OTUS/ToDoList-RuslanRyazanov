@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToDoListItemComponent } from '../to-do-list-item/to-do-list-item.component';
 import { TodoListItem, ItemStatus } from '../../interfaces/to-do-list-item';
 import { FormsModule } from "@angular/forms";
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgClass, NgForOf, NgIf, AsyncPipe } from '@angular/common';
 import { MatFormField } from "@angular/material/form-field";
 import { TodoListService } from "../../shared/services/todoListService";
 import { ToastService } from "../../shared/services/toastService";
@@ -10,7 +10,8 @@ import { SpinnerComponent } from "../spinner/spinner.component";
 import { MatOption, MatSelect } from "@angular/material/select";
 import { ToDoCreateItemComponent } from "../to-do-create-item/to-do-create-item.component";
 import { Router, RouterOutlet } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil, BehaviorSubject, combineLatest, map, Observable } from "rxjs";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-to-do-list',
@@ -20,15 +21,15 @@ import { Subject, takeUntil } from "rxjs";
     FormsModule,
     NgForOf,
     MatFormField,
-
     NgIf,
-
     NgClass,
     SpinnerComponent,
     MatSelect,
     MatOption,
     ToDoCreateItemComponent,
-    RouterOutlet
+    RouterOutlet,
+    AsyncPipe,
+    TranslatePipe
   ],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
@@ -39,23 +40,29 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   public newItemDescription: string = '';
   public description: string = '';
 
-  public componentTitle: string = "Todo List"
-  public isLoading: boolean = true;
+  private isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public selectedItemId: string = '';
-  public filteredItems: TodoListItem[] = [];
-  public selectedStatus: ItemStatus | null = null;
+  private filteredItems: BehaviorSubject<TodoListItem[]> = new BehaviorSubject<TodoListItem[]>([]);
+  private selectedStatus: BehaviorSubject<ItemStatus | null> = new BehaviorSubject<ItemStatus | null>(null);
   public statuses: string[] = Object.values(ItemStatus);
   private destroy$: Subject<void> = new Subject<void>();
+
+
+  public isLoading$: Observable<boolean> = this.isLoading.asObservable();
+  public filteredItems$: Observable<TodoListItem[]> = this.filteredItems.asObservable();
+  public selectedStatus$: Observable<ItemStatus | null> = this.selectedStatus.asObservable();
 
   constructor(
     private todoListService: TodoListService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() =>  this.isLoading = false, 500);
-    this.filterItems();
+    this.initFilter();
+    setTimeout(() => this.isLoading.next(false), 500);
+
   }
 
   public ngOnDestroy(): void {
@@ -63,14 +70,10 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public getAllListItems(): TodoListItem[] {
-    return [...this.filteredItems];
-  }
-
   public addItem(created: boolean):void {
     if (created) {
-      this.filterItems();
-      this.toastService.showToast("Item added");
+      this.initFilter();
+      this.toastService.showToast(this.translateService.instant('toast.task.created'));
     }
   }
 
@@ -78,8 +81,9 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.todoListService.deleteItem(itemId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-      this.filteredItems = this.todoListService.deleteItemArray(this.filteredItems, itemId);
-      this.toastService.showToast("Item deleted");
+        const updatedItems: TodoListItem[] = this.todoListService.deleteItemArray(this.filteredItems.getValue(), itemId);
+        this.filteredItems.next(updatedItems);
+        this.toastService.showToast(this.translateService.instant('toast.task.deleted'));
     });
   }
 
@@ -91,24 +95,31 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     this.todoListService.updateItem(updatedItem)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: TodoListItem) => {
-      this.filteredItems = this.todoListService.updateItemArray(this.filteredItems, response);
-      this.toastService.showToast("Item updated");
+      const updatedItems: TodoListItem[] = this.filteredItems.getValue().map(item =>
+        item.id === response.id ? response : item
+      );
+      const selectedStatus: ItemStatus | null = this.selectedStatus.getValue();
+      const filteredItems: TodoListItem[] =
+        selectedStatus ? updatedItems.filter((item: TodoListItem) => item.status === selectedStatus) : updatedItems;
+      this.filteredItems.next(filteredItems);
+      this.toastService.showToast(this.translateService.instant('toast.task.updated'));
     });
   }
 
-  public filterItems(): void {
-    if (this.selectedStatus === null) {
-      this.todoListService.getAllListItems()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((listItems) => {
-        this.filteredItems = listItems;
-      })
-    } else {
-      this.todoListService.getAllListItems()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((listItems) => {
-        this.filteredItems = listItems.filter(item => item.status === this.selectedStatus);
-      })
-    }
+
+
+
+  protected setStatus(status: ItemStatus | null): void {
+    this.selectedStatus.next(status);
+  }
+  private initFilter(): void {
+    combineLatest([this.todoListService.getAllListItems(), this.selectedStatus$])
+      .pipe(
+        takeUntil(this.destroy$),
+        map(([listItems, selectedStatus]) =>
+          selectedStatus === null ? listItems : listItems.filter(item => item.status === selectedStatus)
+        )
+      )
+      .subscribe(filteredItems => this.filteredItems.next(filteredItems));
   }
 }

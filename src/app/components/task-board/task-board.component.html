@@ -7,14 +7,18 @@
           [routerLink]="'/' + route.path"
           [ngClass]="{'board__link': true, 'board__link_selected': isCurrentRoute(route.name)}"
         >
-          {{ route.name }}
+          {{ route.name | translate }}
         </a>
       }
     </div>
   </div>
   <div class="board__field">
     <div class="board__top">
-      <h3>{{ this.getCurrentTabName() }}</h3>
+      <h3>{{ this.getLocalTabName() }}</h3>
+      <div class="switch-lang">
+        <input type="checkbox" name="toggle" id="toggle-button" class="toggle-button" (click)="switchLanguage(currentLang === 'en' ? 'ru' : 'en')">
+        <label for="toggle-button" class="toggle-text" >{{ currentLang === 'en' ? 'English' : 'Русский' }}</label>
+      </div>
     </div>
     <div class="board-container">
       <router-outlet/>

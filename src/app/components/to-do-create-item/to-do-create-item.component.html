@@ -1,18 +1,18 @@
 <div class="task">
   <input class="task__input"
         [(ngModel)]="newItemValue"
-        placeholder="{{ inputPlaceholder }}"
+        placeholder="{{ 'item.create.addPlaceholder' | translate }}"
         matInput>
   <app-button   (click)="createItem(newItemValue, newItemDescription); newItemValue=''; newItemDescription=''"
                 [disabled]="!newItemValue.trim()"
                 [classTypeButton]="'common__button_add'"
-                tooltip="add new item">
-                {{ addButtonTitle }}
+                tooltip="{{ 'item.create.tooltip' | translate }}">
+                {{ 'item.create.addButtonTitle' | translate }}
   </app-button>
 </div>
 
 <textarea   matInput
             [(ngModel)]="newItemDescription"
-            placeholder="{{ descriptionPlaceholder }}"
+            placeholder="{{ 'item.create.descriptionPlaceholder' | translate }}"
             class="textarea">
 </textarea>

@@ -1,0 +1,18 @@
+{
+  "Board": "Board",
+  "Backlog": "Backlog",
+  "status.all.title": "All",
+  "button.delete.title": "Delete",
+  "button.save.title": "Save",
+  "listItem.edit.tooltip": "Description",
+  "listItem.delete.tooltip": "Delete item",
+  "item.create.tooltip": "Add new item",
+  "item.create.addPlaceholder": "Add new todo",
+  "item.create.descriptionPlaceholder": "Add your new todo description",
+  "item.create.addButtonTitle": "Add task",
+  "toast.task.created": "Item created",
+  "toast.task.updated": "Item updated",
+  "toast.task.deleted": "Item deleted",
+  "toast.task.error": "Error",
+  "toast.task.error.empty": "Error"
+}
