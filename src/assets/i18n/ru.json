@@ -1,0 +1,18 @@
+{
+  "Board": "Доска",
+  "Backlog": "Невыполненные",
+  "status.all.title": "Все",
+  "button.delete.title": "Удалить",
+  "button.save.title": "Сохранить",
+  "listItem.edit.tooltip": "Кликните, чтобы увидеть описание",
+  "listItem.delete.tooltip": "Кликните, чтобы удалить задачу",
+  "item.create.tooltip": "Новая задача",
+  "item.create.addPlaceholder": "Новая задача",
+  "item.create.descriptionPlaceholder": "Описание",
+  "item.create.addButtonTitle": "Добавить задачу",
+  "toast.task.created": "Задача создана",
+  "toast.task.updated": "Задача обновлена",
+  "toast.task.deleted": "Задача удалена",
+  "toast.task.error": "Ошибка",
+  "toast.task.error.empty": "Ошибка"
+}

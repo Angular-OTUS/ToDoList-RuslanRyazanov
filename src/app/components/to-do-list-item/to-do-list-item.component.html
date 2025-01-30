@@ -1,18 +1,18 @@
 <li class="common-list__item">
-  <div (dblclick)="enableEdit()" tooltip="Description">
+  <div (dblclick)="enableEdit()" tooltip="{{ 'listItem.edit.tooltip' | translate }}">
     <input type="checkbox" [checked]="listItem.status === ItemStatus.COMPLETED" (change)="toggleStatus()">
     <span *ngIf="!isEditing" class="common-list__name">{{ listItem.text }}</span>
     <div *ngIf="isEditing">
       <input type="text" [(ngModel)]="editText" />
       <app-button (click)="saveTitle()"
                   [classTypeButton]="'common__button_save'">
-              {{ saveButtonTitle }}
+              {{ 'button.save.title' | translate }}
       </app-button>
     </div>
   </div>
   <app-button (click)="deleteItem()"
               [classTypeButton]="'common__button_delete'"
-              tooltip="click to delete">
-              {{ deleteButtonTitle }}
+              tooltip="{{ 'listItem.delete.tooltip' | translate }}">
+              {{ 'button.delete.title' | translate }}
   </app-button>
 </li>

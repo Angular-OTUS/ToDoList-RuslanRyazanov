@@ -7,14 +7,17 @@
           [routerLink]="'/' + route.path"
           [ngClass]="{'board__link': true, 'board__link_selected': isCurrentRoute(route.name)}"
         >
-          {{ route.name }}
+          {{ route.name | translate }}
         </a>
       }
     </div>
   </div>
   <div class="board__field">
     <div class="board__top">
-      <h3>{{ this.getCurrentTabName() }}</h3>
+      <h3>{{ this.getLocalTabName() }}</h3>
+      <div class="switch-lang">
+        <button class="switch-lang__button" (click)="switchLanguage(currentLang === 'en' ? 'ru' : 'en')">{{ currentLang === 'en' ? 'English' : 'Русский' }}</button>
+      </div>
     </div>
     <div class="board-container">
       <router-outlet/>

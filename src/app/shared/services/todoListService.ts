@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environment";
 import { Observable } from "rxjs";
 import { ToastService } from "./toastService";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: "root"
@@ -22,11 +23,12 @@ export class TodoListService {
 
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private translateService: TranslateService
   ) {}
 
 
-  public addItem(title: string, description?: string) {
+  public addItem(title: string, description?: string): Observable<void> {
     if (title.trim()) {
       const newItem: TodoListItem  = {
         id: this.getInteger(1, 1000),
@@ -34,16 +36,12 @@ export class TodoListService {
         description: description?.trim(),
         status: ItemStatus.IN_PROGRESS
       };
-      this.httpClient.post(this.apiUrl, newItem)
-      .subscribe({
-        error: (err) => {
-          this.toastService.showToast("Error adding new item");
-          console.error(err);
-        }
-    })
-    return true;
+      return this.httpClient.post<void>(this.apiUrl, newItem)
+    } else {
+      this.toastService.showToast(this.translateService.instant('toast.task.error.emptyArray'));
+      throw Error("Error adding new item");
     }
-    return false;
+
   }
   public getAllListItems(): Observable<TodoListItem[]> {
     return this.httpClient.get<TodoListItem[]>(this.apiUrl);

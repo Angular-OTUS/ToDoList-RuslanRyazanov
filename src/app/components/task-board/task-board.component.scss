@@ -5,6 +5,8 @@
     padding: 10px;
     background-color: #416bc5;
     color: #ffffff;
+    display: flex;
+    align-items: center;
   }
   &__side {
     padding: 10px;
@@ -34,5 +36,15 @@
   }
   &-container {
     padding: 20px;
+  }
+}
+
+.switch-lang {
+  margin: 0 0 0 20px;
+  &__button {
+    color: #000;
+    background-color: #617da1;
+    border: 2px solid #000000;
+    transition: 0.3s ease-in-out;
   }
 }
